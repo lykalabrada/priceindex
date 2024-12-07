@@ -1,7 +1,7 @@
 
 # **Order Book Average Price REST API**
 
-This project provides a REST API that calculates the average of the mid-prices from the order books of three cryptocurrency exchanges: Binance, Huobi, and Kraken. The API integrates real-time data from Binance via WebSocket and periodically fetches data from the Huobi and Kraken REST APIs.
+Simple project that provides a REST API that calculates the average of the mid-prices from the order books of three cryptocurrency exchanges: Binance, Huobi, and Kraken. The API integrates real-time data from Binance via WebSocket and fetches data from the Huobi and Kraken REST APIs on demand.
 
 ---
 
@@ -17,6 +17,18 @@ npm install
 npm start
 ```
 
+### **3. Run tests
+```
+# Run all tests (unit + integration)
+npm test
+
+# Run only unit tests
+npm run test:unit
+
+# Run only integration tests
+npm run test:integration
+```
+
 
 ## **API Endpoint**
 
@@ -28,11 +40,11 @@ Retrieves the average mid-price from Binance, Huobi, and Kraken.
 
 ```json
 {
-  "averageMidPrice": 48000.45,
+  "averageMidPrice": 99507.51,
   "sources": {
-    "binance": 47998.50,
-    "huobi": 48001.00,
-    "kraken": 48003.85
+    "binance": 99499.995,
+    "huobi": 99500.385,
+    "kraken": 99522.15
   }
 }
 ```
