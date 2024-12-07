@@ -55,7 +55,7 @@ Retrieves the average mid-price from Binance, Huobi, and Kraken.
 
 ### **Binance**
 - **Order Book**: [Binance Order Book](https://www.binance.com/en/trade/BTC_USDT)
-- **API Documentation**: [Binance WebSocket Streams](https://binance-docs.github.io/apidocs/futures/en/#websocket-market-streams)
+- **API Documentation**: [Binance WebSocket Market Streams](https://binance-docs.github.io/apidocs/futures/en/#websocket-market-streams)
 
 ### **Huobi**
 - **Order Book**: [Huobi Order Book](https://www.htx.com/trade/btc_usdt/)
@@ -63,7 +63,7 @@ Retrieves the average mid-price from Binance, Huobi, and Kraken.
 
 ### **Kraken**
 - **Order Book**: [Kraken Order Book](https://pro.kraken.com/app/trade/btc-usd)
-- **API Documentation**: [Kraken Public Market Data](https://docs.kraken.com/rest/#operation/getOrderBook)
+- **API Documentation**: [Kraken Public Market Data](https://docs.kraken.com/api/docs/rest-api/get-order-book)
 
 ---
 
