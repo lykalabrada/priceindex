@@ -39,7 +39,7 @@ The deployed API is accessible at:
 **[https://priceindex-1.onrender.com/api/average-midprice](https://priceindex-1.onrender.com/api/average-midprice)**
 
 #### **Sample Response**
-- **200 OK**
+- **200 OK** 
 
 ```json
 {
