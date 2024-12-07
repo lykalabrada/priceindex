@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.get("/", (_req: Request, res: Response) => {
   res.send(
-    "Welcome to the Order Book Average Price REST API! This API is deployed on Render. Use /api/average-midprice to get the latest average mid-price from Binance, Huobi, and Kraken."
+    "Welcome to the Order Book Average Price REST API! This API is deployed on Render. Use `/api/average-midprice` to get the latest average mid-price from Binance, Huobi, and Kraken."
   );
 });
 

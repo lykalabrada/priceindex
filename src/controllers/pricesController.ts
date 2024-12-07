@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { EXCHANGES_URL } from "../consts";
 import {
+  getBinanceMidPrice,
   fetchHuobiMidPrice,
   fetchKrakenMidPrice,
-  getBinanceMidPrice,
 } from "../services";
 
 export const getAverageMidPrice = async (
