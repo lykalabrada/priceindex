@@ -36,7 +36,7 @@ npm run test:integration
 
 The deployed API is accessible at:
 
-**[https://link.here](https://render_link_here)**
+**[https://priceindex-6ukn.onrender.com/api/average-midprice](https://priceindex-6ukn.onrender.com/api/average-midprice)**
 
 #### **Sample Response**
 - **200 OK**
@@ -75,12 +75,5 @@ Use this endpoint to retrieve the calculated average mid-price from Binance, Huo
 ## **Deployment**
 
 The API is deployed on **Render** and is available at:
-
-**[https://link.here](https://render_link_here)**
-
----
-
-## **Future Improvements**
-
-- Introduce caching (like Redis) for scalability.
+**[https://priceindex-6ukn.onrender.com/api/average-midprice](https://priceindex-6ukn.onrender.com/api/average-midprice)**
 

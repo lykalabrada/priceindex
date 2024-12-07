@@ -1,3 +1,4 @@
+import axios from "axios";
 import { WebSocket } from "ws";
 
 let binanceMidPrice = 0;
@@ -12,7 +13,9 @@ export const connectBinanceSocket = (url: string): void => {
     binanceMidPrice = (bestAsk + bestBid) / 2;
   });
 
-  ws.onerror = (error) => console.error("Binance Websocket error:", error);
+  ws.onerror = (error) => {
+    console.error("Binance Websocket error:", error.message || error);
+  };
 
   ws.onclose = () => {
     console.warn("Binance Websocket closed. Reconnecting...");
@@ -21,3 +24,19 @@ export const connectBinanceSocket = (url: string): void => {
 };
 
 export const getBinanceMidPrice = (): number => binanceMidPrice;
+
+export const fetchBinanceMidPriceFallback = async (
+  url: string
+): Promise<number> => {
+  try {
+    const response = await axios.get(url, {
+      params: { symbol: "BTCUSDT", limit: 5 },
+    });
+    const bestAsk = parseFloat(response.data.asks[0][0]);
+    const bestBid = parseFloat(response.data.bids[0][0]);
+    return (bestAsk + bestBid) / 2;
+  } catch (error) {
+    console.error("Error fetching Binance price via REST API:", error);
+    return 0;
+  }
+};
