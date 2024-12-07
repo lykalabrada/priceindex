@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "../../api";
+import app from "../../src";
 
 describe("GET /api/average-midprice", () => {
   it("should return the average mid-price from Binance, Huobi, and Kraken", async () => {

@@ -1,6 +1,6 @@
-import { getBinanceMidPrice } from "../../api/services/binance";
+import { getBinanceMidPrice } from "../../src/services/binance";
 
-jest.mock("../../api/services/binance", () => ({
+jest.mock("../../src/services/binance", () => ({
   getBinanceMidPrice: jest.fn(),
 }));
 

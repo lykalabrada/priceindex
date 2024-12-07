@@ -1,6 +1,6 @@
-import { getKrakenMidPrice } from "../../api/services/kraken";
+import { getKrakenMidPrice } from "../../src/services/kraken";
 
-jest.mock("../../api/services/kraken", () => ({
+jest.mock("../../src/services/kraken", () => ({
   getKrakenMidPrice: jest.fn(),
 }));
 
