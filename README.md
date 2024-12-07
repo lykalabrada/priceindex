@@ -25,8 +25,8 @@ npm test
 # Run only unit tests
 npm run test:unit
 
-# Run only integration tests
-npm run test:integration
+# Run only e2e tests
+npm run test:e2e
 ```
 
 
