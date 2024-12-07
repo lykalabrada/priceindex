@@ -36,7 +36,7 @@ npm run test:integration
 
 The deployed API is accessible at:
 
-**[https://link.here](https://heroku_link_here)**
+**[https://link.here](https://render_link_here)**
 
 #### **Sample Response**
 - **200 OK**
@@ -74,9 +74,9 @@ Use this endpoint to retrieve the calculated average mid-price from Binance, Huo
 
 ## **Deployment**
 
-The API is deployed on **Heroku** and is available at:
+The API is deployed on **Render** and is available at:
 
-**[https://link.here](https://heroku_link_here)**
+**[https://link.here](https://render_link_here)**
 
 ---
 
