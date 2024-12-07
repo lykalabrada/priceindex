@@ -17,7 +17,7 @@ npm install
 npm start
 ```
 
-### **3. Run tests
+### **3. Run tests**
 ```
 # Run all tests (unit + integration)
 npm test
@@ -33,7 +33,10 @@ npm run test:integration
 ## **API Endpoint**
 
 ### **GET /api/average-midprice**
-Retrieves the average mid-price from Binance, Huobi, and Kraken.
+
+The deployed API is accessible at:
+
+**[https://priceindex.vercel.app/api/average-midprice](https://priceindex.vercel.app/api/average-midprice)**
 
 #### **Sample Response**
 - **200 OK**
@@ -48,6 +51,8 @@ Retrieves the average mid-price from Binance, Huobi, and Kraken.
   }
 }
 ```
+
+Use this endpoint to retrieve the calculated average mid-price from Binance, Huobi, and Kraken.
 
 ---
 
@@ -64,6 +69,14 @@ Retrieves the average mid-price from Binance, Huobi, and Kraken.
 ### **Kraken**
 - **Order Book**: [Kraken Order Book](https://pro.kraken.com/app/trade/btc-usd)
 - **API Documentation**: [Kraken Public Market Data](https://docs.kraken.com/api/docs/rest-api/get-order-book)
+
+---
+
+## **Deployment**
+
+The API is deployed on **Vercel** and is available at:
+
+**[https://priceindex.vercel.app/api/average-midprice](https://priceindex.vercel.app/api/average-midprice)**
 
 ---
 
