@@ -1,6 +1,6 @@
-import { getHuobiMidPrice } from "../../src/services/huobi";
+import { getHuobiMidPrice } from "../../api/services/huobi";
 
-jest.mock("../../src/services/huobi", () => ({
+jest.mock("../../api/services/huobi", () => ({
   getHuobiMidPrice: jest.fn(),
 }));
 

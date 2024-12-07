@@ -1,4 +1,4 @@
-import app from "./app";
+import app from "./index";
 import { EXCHANGES_URL } from "./consts";
 import { connectBinanceSocket } from "./services/binance";
 
