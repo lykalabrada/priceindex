@@ -3,7 +3,7 @@ import { EXCHANGES_URL } from "./consts";
 import { connectBinanceSocket } from "./services/binance";
 
 // Connect to Binance WS
-connectBinanceSocket(EXCHANGES_URL.BINANCE_WS);
+connectBinanceSocket(EXCHANGES_URL.BINANCE);
 
 /*
 // TODO: Uncomment if we want to poll both Kraken and Huobi APis.

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { WebSocket } from "ws";
 
 let binanceMidPrice = 0;
@@ -24,19 +23,3 @@ export const connectBinanceSocket = (url: string): void => {
 };
 
 export const getBinanceMidPrice = (): number => binanceMidPrice;
-
-export const fetchBinanceMidPriceFallback = async (
-  url: string
-): Promise<number> => {
-  try {
-    const response = await axios.get(url, {
-      params: { symbol: "BTCUSDT", limit: 5 },
-    });
-    const bestAsk = parseFloat(response.data.asks[0][0]);
-    const bestBid = parseFloat(response.data.bids[0][0]);
-    return (bestAsk + bestBid) / 2;
-  } catch (error) {
-    console.error("Error fetching Binance price via REST API:", error);
-    return 0;
-  }
-};
