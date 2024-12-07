@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import express from "express";
+import express, { Request, Response } from "express";
 import router from "./routes";
 
 dotenv.config();
@@ -7,6 +7,10 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
+
+app.get("/", (_req: Request, res: Response) => {
+  res.send("Express on Vercel");
+});
 
 app.use("/api", router);
 
