@@ -1,5 +1,5 @@
 import app from "./app";
-import { EXCHANGES_URL } from "./consts";
+import { EXCHANGES_URL } from "./config";
 import { connectBinanceSocket } from "./services/binance";
 
 // Connect to Binance WS
