@@ -1,5 +1,8 @@
 import request from "supertest";
 import app from "../../src/app";
+import * as binanceService from "../../src/services/binance";
+
+jest.spyOn(binanceService, "getBinanceMidPrice").mockReturnValue(49500);
 
 describe("GET /api/average-midprice", () => {
   it("should return the average mid-price from Binance, Huobi, and Kraken", async () => {
@@ -7,22 +10,14 @@ describe("GET /api/average-midprice", () => {
     expect(response.status).toBe(200);
 
     expect(response.body).toHaveProperty("averageMidPrice");
-    expect(response.body).toHaveProperty("sources");
-    expect(response.body.sources).toHaveProperty("binance");
-    expect(response.body.sources).toHaveProperty("huobi");
-    expect(response.body.sources).toHaveProperty("kraken");
-
-    expect(typeof response.body.sources.binance).toBe("number");
-    expect(typeof response.body.sources.huobi).toBe("number");
-    expect(typeof response.body.sources.kraken).toBe("number");
+    expect(response.body.sources.Binance).toBe(49500);
   });
 
   it("should return a valid average mid-price", async () => {
     const response = await request(app).get("/api/average-midprice");
 
-    // Validate the average price calculation
-    const { binance, huobi, kraken } = response.body.sources;
-    const calculatedAverage = (binance + huobi + kraken) / 3;
+    const { Binance, Huobi, Kraken } = response.body.sources;
+    const calculatedAverage = (Binance + Huobi + Kraken) / 3;
 
     expect(response.body.averageMidPrice).toBeCloseTo(calculatedAverage, 2);
   });

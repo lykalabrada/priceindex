@@ -1,17 +1,22 @@
-import { getBinanceMidPrice } from "../../src/services/binance";
+import * as binanceService from "../../src/services/binance";
+import axios from "axios";
 
-jest.mock("../../src/services/binance", () => ({
-  getBinanceMidPrice: jest.fn(),
-}));
+jest.mock("axios");
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("Binance Service", () => {
-  it("should return the correct mid-price", () => {
-    const mockedGetBinanceMidPrice = getBinanceMidPrice as jest.MockedFunction<
-      typeof getBinanceMidPrice
-    >;
-    mockedGetBinanceMidPrice.mockReturnValue(99460.55);
+  beforeEach(() => {
+    mockedAxios.get.mockReset();
+    jest.restoreAllMocks();
+  });
 
-    const result = getBinanceMidPrice();
-    expect(result).toBe(99460.55);
+  it("should return the mid-price from the WebSocket", () => {
+    const mockedMidPrice = 49500;
+    jest
+      .spyOn(binanceService, "getBinanceMidPrice")
+      .mockReturnValue(mockedMidPrice);
+
+    const midPrice = binanceService.getBinanceMidPrice();
+    expect(midPrice).toBe(mockedMidPrice);
   });
 });

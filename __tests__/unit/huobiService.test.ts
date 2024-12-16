@@ -1,17 +1,41 @@
-import { getHuobiMidPrice } from "../../src/services/huobi";
+import * as huobiService from "../../src/services/huobi";
+import axios from "axios";
 
-jest.mock("../../src/services/huobi", () => ({
-  getHuobiMidPrice: jest.fn(),
-}));
+jest.mock("axios");
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("Huobi Service", () => {
-  it("should return the correct mid-price", () => {
-    const mockedGetHuobiMidPrice = getHuobiMidPrice as jest.MockedFunction<
-      typeof getHuobiMidPrice
-    >;
-    mockedGetHuobiMidPrice.mockReturnValue(99469.69);
+  beforeEach(() => {
+    mockedAxios.get.mockReset();
+    jest.restoreAllMocks();
+  });
 
-    const result = getHuobiMidPrice();
-    expect(result).toBe(99469.69);
+  it("should fetch the mid-price successfully", async () => {
+    mockedAxios.get.mockResolvedValueOnce({
+      data: {
+        tick: {
+          asks: [["52000.00", "5"]],
+          bids: [["51000.00", "5"]],
+        },
+      },
+    });
+
+    const midPrice = await huobiService.fetchHuobiMidPrice(
+      "https://api.huobi.pro/market/depth?symbol=btcusdt&type=step0"
+    );
+
+    expect(midPrice).toBe(51500);
+    expect(mockedAxios.get).toHaveBeenCalledWith(
+      "https://api.huobi.pro/market/depth?symbol=btcusdt&type=step0"
+    );
+  });
+
+  it("should throw an error if the REST API call fails", async () => {
+    mockedAxios.get.mockRejectedValueOnce(new Error("Request failed"));
+    await expect(
+      huobiService.fetchHuobiMidPrice(
+        "https://api.huobi.pro/market/depth?symbol=btcusdt&type=step0"
+      )
+    ).rejects.toThrow("Request failed");
   });
 });
