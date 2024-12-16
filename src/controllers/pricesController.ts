@@ -13,8 +13,12 @@ export const getAverageMidPrice = async (
 ): Promise<void> => {
   try {
     const binanceMidPrice = getBinanceMidPrice();
-    const huobiMidPrice = await fetchHuobiMidPrice(EXCHANGES_URL.HUOBI);
-    const krakenMidPrice = await fetchKrakenMidPrice(EXCHANGES_URL.KRAKEN);
+
+    // Fetch mid-prices for Huobi and Kraken concurrently
+    const [huobiMidPrice, krakenMidPrice] = await Promise.all([
+      fetchHuobiMidPrice(EXCHANGES_URL.HUOBI),
+      fetchKrakenMidPrice(EXCHANGES_URL.KRAKEN),
+    ]);
 
     const avgMidPrice = (binanceMidPrice + huobiMidPrice + krakenMidPrice) / 3;
 
