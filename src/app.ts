@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import express, { Request, Response } from "express";
 import rateLimit from "express-rate-limit";
 import router from "./routes";
+import { errorHandler } from "./middlewares/errorHandler";
 
 dotenv.config();
 
@@ -26,5 +27,13 @@ app.get("/", (_req: Request, res: Response) => {
 });
 
 app.use("/api", router);
+
+// Fallback for undefined routes
+app.use((_req: Request, res: Response) => {
+  res.status(404).json({ error: { message: "Route not found." } });
+});
+
+// Error handling middleware
+app.use(errorHandler);
 
 export default app;

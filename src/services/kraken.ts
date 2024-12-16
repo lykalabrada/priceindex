@@ -11,7 +11,8 @@ export const fetchKrakenMidPrice = async (url: string): Promise<number> => {
 
     return krakenMidPrice;
   } catch (error) {
-    console.error("Error fetching Huobi data:", error.message || error);
+    error.service = "Kraken";
+    throw error;
   }
 };
 

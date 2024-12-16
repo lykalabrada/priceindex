@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { EXCHANGES_URL } from "../config";
 import {
   getBinanceMidPrice,
@@ -8,7 +8,8 @@ import {
 
 export const getAverageMidPrice = async (
   _req: Request,
-  res: Response
+  res: Response,
+  next: NextFunction
 ): Promise<void> => {
   try {
     const binanceMidPrice = getBinanceMidPrice();
@@ -26,7 +27,6 @@ export const getAverageMidPrice = async (
       },
     });
   } catch (error) {
-    console.error("Error fetching prices:", error.message || error);
-    res.status(500).json({ error: "Failed to fetch prices." });
+    next(error);
   }
 };
