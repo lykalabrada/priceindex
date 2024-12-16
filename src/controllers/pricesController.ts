@@ -1,10 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { EXCHANGES_URL } from "../config";
-import {
-  getBinanceMidPrice,
-  fetchHuobiMidPrice,
-  fetchKrakenMidPrice,
-} from "../services";
+import { exchangeRegistry } from "../exchanges/exchangeRegistry";
 
 export const getAverageMidPrice = async (
   _req: Request,
@@ -12,23 +7,31 @@ export const getAverageMidPrice = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const binanceMidPrice = getBinanceMidPrice();
+    // Fetch mid-prices from all exchanges in parallel
+    const results = await Promise.all(
+      exchangeRegistry.map(async (exchange) => {
+        const midPrice = await exchange.getMidPrice();
+        return { name: exchange.name, midPrice };
+      })
+    );
 
-    // Fetch mid-prices for Huobi and Kraken concurrently
-    const [huobiMidPrice, krakenMidPrice] = await Promise.all([
-      fetchHuobiMidPrice(EXCHANGES_URL.HUOBI),
-      fetchKrakenMidPrice(EXCHANGES_URL.KRAKEN),
-    ]);
+    // Calculate average mid-price
+    const validPrices = results
+      .map((result) => result.midPrice)
+      .filter((price) => price > 0);
+    if (validPrices.length === 0) {
+      throw new Error("All exchanges failed to provide valid mid-price data.");
+    }
 
-    const avgMidPrice = (binanceMidPrice + huobiMidPrice + krakenMidPrice) / 3;
+    const avgMidPrice =
+      validPrices.reduce((sum, price) => sum + price, 0) / validPrices.length;
 
     res.json({
       averageMidPrice: avgMidPrice,
-      sources: {
-        binance: binanceMidPrice,
-        huobi: huobiMidPrice,
-        kraken: krakenMidPrice,
-      },
+      sources: results.reduce((acc, result) => {
+        acc[result.name] = result.midPrice;
+        return acc;
+      }, {} as Record<string, number>),
     });
   } catch (error) {
     next(error);
